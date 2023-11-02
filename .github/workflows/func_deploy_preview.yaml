@@ -15,6 +15,7 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: preview
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
@@ -27,4 +28,4 @@ jobs:
           slot-name: "preview"
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           respect-funcignore: true
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_01C159B680DA408D841139081409B3FD }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
