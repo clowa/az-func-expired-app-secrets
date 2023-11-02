@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-azuretools.vscode-azurefunctions",
+    "ms-vscode.PowerShell",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "hashicorp.terraform",
+    "DavidAnson.vscode-markdownlint"
+  ]
+}
