@@ -99,3 +99,20 @@ resource "azurerm_linux_function_app" "this" {
     ]
   }
 }
+
+resource "azurerm_linux_function_app_slot" "preview" {
+  name                 = "preview"
+  function_app_id      = azurerm_linux_function_app.this.id
+  storage_account_name = azurerm_storage_account.this.name
+
+  site_config {
+    ftps_state = "Disabled"
+
+    application_insights_connection_string = azurerm_application_insights.this.connection_string
+    application_insights_key               = azurerm_application_insights.this.instrumentation_key
+
+    application_stack {
+      powershell_core_version = "7.2"
+    }
+  }
+}
