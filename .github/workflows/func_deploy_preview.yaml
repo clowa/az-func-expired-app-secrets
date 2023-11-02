@@ -7,6 +7,9 @@ on:
   push:
     branches-ignore:
       - main
+    paths:
+      - "functions/**"
+      - ".github/workflows/**"
   workflow_dispatch:
 
 env:
