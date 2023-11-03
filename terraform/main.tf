@@ -101,9 +101,21 @@ resource "azurerm_linux_function_app" "this" {
 }
 
 resource "azurerm_linux_function_app_slot" "preview" {
-  name                 = "preview"
-  function_app_id      = azurerm_linux_function_app.this.id
-  storage_account_name = azurerm_storage_account.this.name
+  name            = "preview"
+  function_app_id = azurerm_linux_function_app.this.id
+  tags = merge(local.tags, {
+    "hidden-link: /app-insights-conn-string"         = azurerm_application_insights.this.connection_string
+    "hidden-link: /app-insights-instrumentation-key" = azurerm_application_insights.this.instrumentation_key
+    "hidden-link: /app-insights-resource-id"         = azurerm_application_insights.this.id
+  })
+
+  storage_account_name       = azurerm_storage_account.this.name
+  storage_account_access_key = azurerm_storage_account.this.primary_access_key
+  https_only                 = true
+
+  identity {
+    type = "SystemAssigned"
+  }
 
   site_config {
     ftps_state = "Disabled"
