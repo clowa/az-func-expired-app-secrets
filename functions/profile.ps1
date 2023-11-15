@@ -38,6 +38,9 @@ if ($env:MSI_SECRET) {
 
 # You can also define functions or aliases that can be referenced in any of your PowerShell functions.
 
+###################################################################################################
+# Classes
+
 class ExpiredAppCredentials {
   [String] $SecretName
   [DateTime] $ExpirationTime
@@ -54,3 +57,6 @@ class ExpiredAppInformation {
   [String] $OwnerUsername
   [ExpiredAppCredentials[]] $ExpiredSecrets
 }
+
+###################################################################################################
+# Functions
