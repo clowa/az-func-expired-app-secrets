@@ -57,3 +57,20 @@ resource "azurerm_application_insights" "this" {
   workspace_id        = azurerm_log_analytics_workspace.this.id
   sampling_percentage = 0
 }
+
+resource "azurerm_key_vault" "this" {
+  name                = substr("${local.global_prefix}-kv", 0, 24)
+  resource_group_name = azurerm_resource_group.this.name
+  location            = azurerm_resource_group.this.location
+  tags                = local.tags
+
+  sku_name                  = "standard"
+  tenant_id                 = data.azurerm_client_config.current.tenant_id
+  enable_rbac_authorization = true
+}
+
+resource "azurerm_role_assignment" "app_key_vault_user" {
+  principal_id         = azurerm_linux_function_app.main.identity[0].principal_id
+  role_definition_name = "Key Vault Secrets User"
+  scope                = azurerm_key_vault.this.id
+}

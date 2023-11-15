@@ -38,6 +38,9 @@ resource "azurerm_linux_function_app" "main" {
     ignore_changes = [
       app_settings["WEBSITE_RUN_FROM_PACKAGE"],
       app_settings["API_FUNCTION_KEY"],
+      app_settings["MAIL_USERNAME"],
+      app_settings["MAIL_PASSWORD"],
+      app_settings["MAIL_RECIPIENT"],
       tags["hidden-link: /app-insights-resource-id"], # inconsistent formating of Azure API
     ]
   }
