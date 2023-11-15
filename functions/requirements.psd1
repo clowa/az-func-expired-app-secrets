@@ -8,4 +8,5 @@
   'Az.Storage'                     = '5.*'
   'Microsoft.Graph.Authentication' = '2.*'
   'Microsoft.Graph.Applications'   = '2.*'
+  'Mailozaurr'                     = "1.*"
 }
