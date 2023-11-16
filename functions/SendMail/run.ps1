@@ -112,4 +112,11 @@ $sendMailParams.HTML = @"
 </html>
 "@
 
-Send-EmailMessage @sendMailParams
+$mailResult = Send-EmailMessage @sendMailParams
+
+if ($mailResult.Status -eq $true) {
+  Write-Host "Successfully sent email from $($mailResult.SendFrom) to $($mailResult.SendTo) within $($mailResult.TimeToExecute).)"
+} else {
+  Write-Error "Failed to send email from $($mailResult.SendFrom) to $($mailResult.SendTo). Server response$($mailResult.Message)"
+  throw $mailResult.Error
+}
